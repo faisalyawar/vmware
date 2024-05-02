@@ -9,7 +9,7 @@
     datacenter: "{{ datacenter }}"
     folder: "{{ folder }}"
     state: poweredon
-    guest_id: "{{ guest_id }}"
+    guest_id: "{{ guest_id | default('windows2019srv_64Guest') }}"
     # This is hostname of particular ESXi server on which user wants VM to be deployed
     esxi_hostname: "{{ esxi_hostname | default(omit) }}"
     disk:
