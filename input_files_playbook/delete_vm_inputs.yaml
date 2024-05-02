@@ -1,5 +1,7 @@
 # Mandatory variables
-vm_folder: ""
-vm_name: ""
+vm_name: 'Test-Ansible'
+vcenter_hostname: 'cob-vcenterd-01.wssc.ad.root'
+datacenter: 'DEV_QA_DataCenter'
+folder: '/DEV_QA_DataCenter/vm'
 # Optional variables
 validate_certs: ""

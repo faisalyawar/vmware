@@ -1,18 +1,23 @@
 # Mandatory variables
-vm_folder: ""
-vm_name: ""
-guest_id: ""
-disk_size_gb: ""
-disk_type: ""
-disk_datastore: ""
-hardware_memeory_mb: ""
-hardware_num_cpus: ""
-hardware_scsi: ""
-network_name: ""
-network_mac: ""
-network_ip: ""
-network_netmask: ""
-network_device_type: ""
+vm_name: 'Test-Ansible'
+guest_id: 'Windows_server_2019'
+disk_size_gb: '100'
+disk_type: 'thin'
+disk_datastore: 'cob_dev_qa_container_1'
+hardware_memeory_mb: '16384'
+hardware_num_cpus: '4'
+hardware_scsi: 'paravirtual'
+network_name: 'DEV_QA_VLAN_26'
+#network_mac: ''
+#network_ip: ''
+#network_netmask: ''
+network_device_type: 'vmxnet3'
+folder: '/DEV_QA_DataCenter/vm'
+datacenter: 'DEV_QA_DataCenter'
+vcenter_hostname: 'cob-vcenterd-01.wssc.ad.root'
+iso_path: >-
+  [cob_dev_qa_container_1]
+  ISOs/SW_DVD9_Win_Server_STD_CORE_2019_1809.16_64Bit_English_DC_STD_MLF_X22-67487.ISO
 # Optional variables
 wait_for_ip_address: ""
 wait_for_ip_address_timeout: ""
