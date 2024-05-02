@@ -3,6 +3,7 @@
   community.vmware.vmware_guest:
     validate_certs: "{{ validate_certs | default('no') }}"
     hostname: "{{ vcenter_hostname }}"
+    datacenter: "{{ datacenter }}"
     username: "{{ vcenter_username }}"
     password: "{{ vcenter_password }}"
     esxi_hostname: "{{ esxi_hostname | default(omit) }}"
