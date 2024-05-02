@@ -22,7 +22,7 @@
       scsi: "{{ hardware_scsi | default('paravirtual') }}"
     networks:
       - name: "{{ network_name | default('VM Network') }}"
-        mac: "{{ network_mac | default(omit) }}"
+        #mac: "{{ network_mac | default(omit) }}"
         ip: "{{ network_ip | default(omit) }}"
         netmask: "{{ network_netmask | default(omit) }}"
         device_type: "{{ network_device_type | default('vmxnet3') }}"
