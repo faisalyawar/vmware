@@ -20,7 +20,7 @@
     username: "{{ vcenter_username }}"
     password: "{{ vcenter_password }}"
     esxi_hostname: "{{ esxi_hostname | default(omit) }}"
-    folder: "{{ folder | default('/DC01_INFRA/vm') }}"
-    name: "{{ vm_name | default('test_vm') }}"
+    folder: "{{ folder }}"
+    name: "{{ vm_name }}"
     state: "{{ state | default('absent') }}"
   delegate_to: localhost
