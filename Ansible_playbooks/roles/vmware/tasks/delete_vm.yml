@@ -1,0 +1,25 @@
+---
+- name: Power OFF VM "{{ vm_name }}"
+  community.vmware.vmware_guest:
+    validate_certs: "{{ validate_certs | default('no') }}"
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    esxi_hostname: "{{ esxi_hostname | default(omit) }}"
+    validate_certs: "{{ validate_certs | default('no') }}"
+    folder: "{{ folder | default('/DC01_INFRA/vm') }}"
+    name: "{{ vm_name | default('test_vm') }}"
+    state: poweredoff
+  delegate_to: localhost
+
+- name: Remove VM "{{ vm_name }}"
+  community.vmware.vmware_guest:
+    validate_certs: "{{ validate_certs | default('no') }}"
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    esxi_hostname: "{{ esxi_hostname | default(omit) }}"
+    folder: "{{ folder | default('/DC01_INFRA/vm') }}"
+    name: "{{ vm_name | default('test_vm') }}"
+    state: "{{ state | default('absent') }}"
+  delegate_to: localhost

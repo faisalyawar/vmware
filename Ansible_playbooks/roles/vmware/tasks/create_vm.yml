@@ -1,0 +1,38 @@
+---
+- name: Create a virtual machine with all inputs
+  community.vmware.vmware_guest:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    validate_certs: "{{ validate_certs | default('no') }}"
+    name: "{{ vm_name | default('test_vm') }}"
+    datacenter: "{{ datacenter |default('DC01_INFRA') }}"
+    folder: "{{ folder | default('/DC01_INFRA/vm') }}"
+    state: poweredon
+    guest_id: "{{ guest_id | default('otherlinux64guest') }}"
+    # This is hostname of particular ESXi server on which user wants VM to be deployed
+    esxi_hostname: "{{ esxi_hostname | default(omit) }}"
+    disk:
+      - size_gb: "{{ disk_size_gb | default(40) }}"
+        type: "{{ disk_type | default('thin') }}"
+        datastore: "{{ disk_datastore | default('3ParStorage_A8200R1U15') }}"
+    hardware:
+      memory_mb: "{{ hardware_memeory_mb | default(4096) }}"
+      num_cpus: "{{ hardware_num_cpus |  default(4) }}"
+      scsi: "{{ hardware_scsi | default('paravirtual') }}"
+    networks:
+      - name: "{{ network_name | default('VM Network') }}"
+        mac: "{{ network_mac | default(omit) }}"
+        ip: "{{ network_ip | default(omit) }}"
+        netmask: "{{ network_netmask | default(omit) }}"
+        device_type: "{{ network_device_type | default('vmxnet3') }}"
+    cdrom:
+      - controller_number: 0
+        unit_number: 0
+        state: present
+        type: iso
+        iso_path: "{{ iso_path | default('[CommonDS] ISO/Rocky-9.1-x86_64-dvd.iso') }}"
+    wait_for_ip_address: "{{ wait_for_ip_address | default(true)}}"
+    wait_for_ip_address_timeout: "{{ wait_for_ip_address_timeout | default(100)}}"
+  delegate_to: localhost
+  register: deploy_vm

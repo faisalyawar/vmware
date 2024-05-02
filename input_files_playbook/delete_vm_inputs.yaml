@@ -1,0 +1,5 @@
+# Mandatory variables
+vm_folder: ""
+vm_name: ""
+# Optional variables
+validate_certs: ""

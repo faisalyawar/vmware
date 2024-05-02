@@ -1,0 +1,9 @@
+- name: Gather one specific VM
+  community.vmware.vmware_vm_info:
+    hostname: '{{ vcenter_hostname }}'
+    username: '{{ vcenter_username }}'
+    password: '{{ vcenter_password }}'
+    vm_name: 'dbpaRefactor'
+    validate_certs: "{{ validate_certs | default('no') }}"
+  delegate_to: localhost
+  register: vm_info

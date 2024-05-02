@@ -1,0 +1,51 @@
+---
+
+- name: set connection info
+  ansible.builtin.set_fact:
+    connection_args:
+      vcenter_hostname: "{{ vcenter_hostname }}"
+      vcenter_username: "{{ vcenter_username }}"
+      vcenter_password: "{{ vcenter_password }}"
+      vcenter_validate_certs: "{{ vcenter_validate_certs | default(false) }}"
+
+- name: Create a virtual machine
+  vmware.vmware_rest.vcenter_vm:
+    vcenter_hostname: "{{ vcenter_hostname }}"
+    vcenter_username: "{{ vcenter_username }}"
+    vcenter_password: "{{ vcenter_password }}"
+    vcenter_validate_certs: "{{ vcenter_validate_certs | default(false) }}"
+    state: "{{ state | default('present') }}"
+    power_on: "{{ power_on | default(true) }}"
+    placement:
+      cluster: "{{ cluster | default(omit) }}"
+      datastore: "{{ datastore }}"
+      folder: "{{ folder | default(omit) }}"
+      resource_pool: "{{ resource_pool | default(omit) }}"
+    name: "{{ vm_name | default('test_vm') }}"
+    guest_OS: "{{ guest_os | default('OTHER_LINUX_64')}}"
+    hardware_version: "{{ hardware_version |default('VMX_18') }}"
+    memory:
+      hot_add_enabled: "{{ hot_add_enabled | default(true) }}"
+      size_MiB: "{{ size_mib | default(1024) }}"
+    cpu:
+      count: "{{ num_cpus | default(4) }}"
+    nics:
+      - type: "VMXNET3"
+        backing:
+          type: "{{ backing_type | default('STANDARD_PORTGROUP') }}"
+          network: "{{ network_name | default('VM Network') }}"
+          start_connected: "{{ start_connected | default('present') }}"
+    cdroms:
+      - backing:
+          iso_file: "{{ iso_file_path | default('[CommonDS] ISO/Rocky-9.1-x86_64-dvd.iso') }}"
+          type: "ISO_FILE"
+        type: "SATA"
+        allow_guest_control: "{{ allow_guest_control | default(true) }}"
+    memory:
+      size_MiB: "{{ size_MiB | default(16384) }}"
+    disks:
+      - type: SCSI
+        backing:
+          type: VMDK_FILE
+          vmdk_file: '[local] test_vm1/{{ disk_name }}.vmdk'
+  register: vm_result

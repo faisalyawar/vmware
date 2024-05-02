@@ -1,0 +1,10 @@
+---
+
+- hosts: localhost
+  gather_facts: true
+  tasks:
+    - name: Delete Virtual machine
+      ansible.builtin.include_role:
+        name: vmware
+      vars:
+        task_name: delete_vm

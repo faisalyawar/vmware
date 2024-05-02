@@ -1,0 +1,10 @@
+---
+
+- hosts: localhost
+  gather_facts: true
+  tasks:
+    - name: create vm without template
+      ansible.builtin.include_role:
+        name: vmware
+      vars:
+        task_name: create_vm
