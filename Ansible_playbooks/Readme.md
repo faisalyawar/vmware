@@ -11,7 +11,7 @@ This readme explains about the input variables for create and delete the VM's.
 vcenter_hostname: "" # Vcenter ip address or vcenter hostname
 folder: ""  # Path of the vm folder to be created
 vm_name: "" # Virtual machine name
-guest_id: "" # Guest id like other64guest, etc.,
+guest_id: "" # Guest id like other64guest, etc., https://docs.vmware.com/en/VMware-HCX/4.9/hcx-user-guide/GUID-D4FFCBD6-9FEC-44E5-9E26-1BD0A2A81389.html
 disk_size_gb: "" # Disk size of virtual machine in GB
 disk_type: ""  # Disk type of virtual machine like thin, thick
 disk_datastore: "" # datastore name
